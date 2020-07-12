@@ -1881,7 +1881,7 @@ pub struct DeserializeRecordsIntoIter<R, D> {
     rdr: Reader<R>,
     rec: StringRecord,
     headers: Option<StringRecord>,
-    _priv: PhantomData<D>,
+    _priv: PhantomData<fn() -> D>,
 }
 
 impl<R: io::Read, D: DeserializeOwned> DeserializeRecordsIntoIter<R, D> {
@@ -1939,7 +1939,7 @@ pub struct DeserializeRecordsIter<'r, R: 'r, D> {
     rdr: &'r mut Reader<R>,
     rec: StringRecord,
     headers: Option<StringRecord>,
-    _priv: PhantomData<D>,
+    _priv: PhantomData<fn() -> D>,
 }
 
 impl<'r, R: io::Read, D: DeserializeOwned> DeserializeRecordsIter<'r, R, D> {
